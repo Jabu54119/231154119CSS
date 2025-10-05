@@ -5,6 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Portfolio</title>
     <style>
+
+        /* Reload button */
+        .reload-btn {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            z-index: 9999;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: #fff;
+            border: none;
+            padding: 0.6rem 0.8rem;
+            border-radius: 8px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+            cursor: pointer;
+            font-weight: 600;
+            pointer-events: auto;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .reload-btn:hover,
+        .reload-btn:focus {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.28);
+            outline: none;
+        }
+
+        .reload-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -289,6 +320,30 @@
     <hr>
 
     <script>
+
+        // Reload button handler
+        function reloadPage() {
+            // Use location.reload to perform a full reload
+            try {
+                location.reload();
+            } catch (e) {
+                // Fallback: set location to itself
+                location.href = location.href;
+            }
+        }
+
+        // Attach click and keyboard handlers when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            const btn = document.getElementById('reloadBtn');
+            if (btn) {
+                btn.addEventListener('click', reloadPage);
+                // Allow Enter/Space to trigger reload when focused
+                btn.addEventListener('keyup', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') reloadPage();
+                });
+            }
+        });
+        
         // Create floating elements
         function createFloatingElements() {
             const container = document.getElementById('floatingElements');
@@ -347,3 +402,4 @@
 </body>
 
 </html>
+
